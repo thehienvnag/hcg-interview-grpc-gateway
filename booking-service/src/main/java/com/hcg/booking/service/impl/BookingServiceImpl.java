@@ -19,12 +19,14 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public boolean isAvailable(Integer id, LocalDate checkoutTime, LocalDate checkinTime) {
-        return bookingRepository.countBookingAvailable(id, checkoutTime, checkinTime) == 0;
+        return bookingRepository.countAlreadyBooked(id, checkoutTime, checkinTime) == 0;
     }
 
     @Override
     public int createBooking(BookingDTO message) {
         Booking bookingToSave = BookingMapper.INSTANCE.convertToBooking(message);
+        bookingToSave.setActive(true);
+        bookingToSave.setCreatedAt(LocalDateTime.now());
         bookingRepository.save(bookingToSave);
         return bookingToSave.getId();
     }
@@ -43,7 +45,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public boolean existsByGuestId(Integer guestId) {
-        return bookingRepository.existsByGuestId(guestId);
+    public boolean existsByIdAndGuestId(Integer bookingId, Integer guestId) {
+        return bookingRepository.existByIdAndGuestId(bookingId, guestId) > 0;
     }
 }

@@ -13,6 +13,7 @@ spring:
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:db_booking_example}
 
+
   mvc:
     validation:
       fail-on-errors: true
@@ -20,7 +21,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
       show-sql: true
       format-sql: true
       type: info

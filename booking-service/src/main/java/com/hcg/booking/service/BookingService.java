@@ -10,5 +10,5 @@ public interface BookingService {
     int createBooking(BookingDTO message);
     void cancelBooking(Integer id);
     boolean existsById(Integer id);
-    boolean existsByGuestId(Integer guestId);
+    boolean existsByIdAndGuestId(Integer bookingId, Integer guestId);
 }

@@ -37,11 +37,16 @@ public class InputValidationAdvice {
 			case UNAUTHENTICATED:
 				dto.setStatus(HttpStatus.UNAUTHORIZED);
 				break;
+			case PERMISSION_DENIED:
+				dto.setStatus(HttpStatus.FORBIDDEN);
+				break;
 			case INVALID_ARGUMENT:
 				dto.setStatus(HttpStatus.BAD_REQUEST);
 				List<InputErrorDTO> errors = getInputErrorDTO(exception);
 				if (errors == null) {
 					dto.setMessage(exception.getMessage());
+				} else {
+					dto.setInputErrors(errors);
 				}
 				break;
 			case ALREADY_EXISTS:

@@ -21,20 +21,16 @@ public class DeleteBookingActionImpl implements DeleteBookingAction {
     @Override
     public ActionResultDTO<DeleteBookingReply> proceedInternal(ValidatedDeleteBookingMessage message) {
 
-        // Check booking exists
-        if (!bookingService.existsById(message.getBookingId())) {
+        Integer bookingId = message.getBookingId();
+
+        // Check if user owns booking
+        int userId = UserTokenValidationInterceptor.USER_IDENTITY.get();
+        if (!bookingService.existsByIdAndGuestId(bookingId, userId)) {
             return new ActionResultDTO<>(Status.NOT_FOUND
                     .withDescription("Booking not found"), null);
         }
 
-        // Check if user owns booking
-        int userId = UserTokenValidationInterceptor.USER_IDENTITY.get();
-        if (!bookingService.existsByGuestId(userId)) {
-            return new ActionResultDTO<>(Status.PERMISSION_DENIED
-                    .withDescription("User authenticated does not own booking"), null);
-        }
-
-        bookingService.cancelBooking(message.getBookingId());
+        bookingService.cancelBooking(bookingId);
 
         return new ActionResultDTO<>(Status.OK, DeleteBookingReply.newBuilder()
                 .setSuccess(true)

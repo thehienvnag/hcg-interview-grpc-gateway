@@ -12,6 +12,7 @@ FROM openjdk:11-jre-slim-buster
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app-runner.jar
 
-ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8200
+ARG BOOKING_DEBUG_PORT
+ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:$BOOKING_DEBUG_PORT
 
 ENTRYPOINT ["java", "-jar", "app-runner.jar"]
