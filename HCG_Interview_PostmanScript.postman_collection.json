@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "dd5cd73e-f1e3-4f38-8297-697e28d2428e",
+		"name": "HCG_Interview_PostmanScript",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "7982889"
+	},
+	"item": [
+		{
+			"name": "01. Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response body as JSON",
+							"var responseBody = JSON.parse(responseBody);",
+							"",
+							"// Save the access token to an environment variable or global variable",
+							"pm.globals.set(\"accessToken\", responseBody.accessToken)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"abc@gmail.com\",\n    \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8088/api/v1/login"
+			},
+			"response": []
+		},
+		{
+			"name": "02. Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"abc@gmail.com\",\n    \"password\": \"12345678\",\n    \"firstName\": \"Ivan\",\n    \"lastName\": \"Huynh\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8088/api/v1/register"
+			},
+			"response": []
+		},
+		{
+			"name": "03. Create Booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"roomId\": 3,\n  \"guestId\": 1,\n  \"checkinTime\": \"2023/07/08\",\n  \"checkoutTime\": \"2023/07/09\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8088/api/v1/booking"
+			},
+			"response": []
+		},
+		{
+			"name": "04. Delete Booking",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "localhost:8088/api/v1/booking/1"
+			},
+			"response": []
+		}
+	]
+}
