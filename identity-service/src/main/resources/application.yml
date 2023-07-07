@@ -1,0 +1,57 @@
+grpc:
+  server:
+    port: ${SERVICE_PORT:8091}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_DB_SERVER_ADDRESS:localhost}:${POSTGRES_DB_SERVER_PORT:5432}/
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:db_identity_example}
+
+  mvc:
+    validation:
+      fail-on-errors: true
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+      format-sql: true
+      type: info
+      use-sql-comments: true
+      properties:
+        hibernate.use_sql_comments: true
+        hibernate.format_sql: true
+
+spring-doc:
+  show-actuator: true
+  paths-to-match: /**
+  packages-to-scan: com.hcg.gateway
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+logging:
+  level:
+    org.springframework: INFO
+    com.hcg.gateway: INFO
+
+jwt:
+  secretKey: secret
+  issuer: ivan
+  expirationMinute: 10
+
+swagger:
+  contact-name: Huynh The Hien
+  contact-mail: ivanhswe@gmail.com
+  contact-url: https://github.com/thehienvnag
+  app-name: Interview for HashGroup company - Hotel Booking API
+  app-description: "This project includes : Spring Boot(2.7.4), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger"
+  app-version: 1.0.0

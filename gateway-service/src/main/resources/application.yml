@@ -1,0 +1,42 @@
+server:
+  port: ${SERVICE_PORT:8088}
+
+managed-grpc-channel:
+  identity-service:
+    host: ${IDENTITY_SERVICE_ADDRESS:localhost}
+    port: ${IDENTITY_SERVICE_PORT:8091}
+  booking-service:
+    host: ${BOOKING_SERVICE_ADDRESS:localhost}
+    port: ${BOOKING_SERVICE_PORT:8090}
+
+spring-doc:
+  show-actuator: true
+  paths-to-match: /**
+  packages-to-scan: com.hcg.gateway
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+logging:
+  level:
+    org.springframework: INFO
+    com.hcg.gateway: INFO
+
+jwt:
+  secretKey: secret
+  issuer: ivan
+  expirationMinute: 10
+
+swagger:
+  contact-name: Huynh The Hien
+  contact-mail: ivanhswe@gmail.com
+  contact-url: https://github.com/thehienvnag
+  app-name: Interview for HashGroup company - Hotel Booking API
+  app-description: "This project includes : Spring Boot(2.7.4), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger"
+  app-version: 1.0.0

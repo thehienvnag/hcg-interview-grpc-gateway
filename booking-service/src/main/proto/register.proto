@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.hcg.identity.grpc.service;
+option java_multiple_files = true;
+
+message RegisterMessage {
+    string email = 2;
+    string password = 3;
+    string first_name = 4;
+    string last_name = 5;
+}
+
+message RegisterReply {
+    bool success = 1;
+    int32 id = 2;
+    string email = 3;
+}
+
+service RegisterService {
+    rpc Register (RegisterMessage) returns (RegisterReply);
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.hcg.booking.grpc.service;
+
+
+option java_multiple_files = true;
+
+message DeleteBookingMessage {
+    int32 booking_id = 1;
+}
+
+message DeleteBookingReply {
+    bool success = 1;
+}
+
+service DeleteBookingService {
+    rpc Delete (DeleteBookingMessage) returns (DeleteBookingReply);
+}

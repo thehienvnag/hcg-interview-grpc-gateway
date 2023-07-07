@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.hcg.booking.grpc.service;
+
+option java_multiple_files = true;
+
+message CreateBookingMessage {
+    int32 room_id = 1;
+    int32 guest_id = 3;
+    string checkin_time = 6;
+    string checkout_time = 7;
+}
+
+message CreateBookingReply {
+    bool success = 1;
+    int32 booking_id = 2;
+    string room_name = 3;
+    string guest_last_name = 4;
+    string guest_first_name = 5;
+}
+
+service CreateBookingService {
+    rpc Create (CreateBookingMessage) returns (CreateBookingReply);
+}

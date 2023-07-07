@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.hcg.identity.grpc.service;
+option java_multiple_files = true;
+
+message GetUserDetailsMessage {
+    int32 user_id = 1;
+}
+
+message GetUserDetailsReply {
+    bool success = 1;
+    int32 user_id = 2;
+    string email = 3;
+    string first_name = 4;
+    string last_name = 5;
+}
+
+service GetUserDetailsService {
+    rpc GetDetails (GetUserDetailsMessage) returns (GetUserDetailsReply);
+}
