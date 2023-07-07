@@ -22,8 +22,6 @@ cd <repository_directory>
 ```
 3. Open the terminal or command prompt and run the following command to start the services using Docker Compose:
 ```sh
-git clone https://github.com/thehienvnag/hcg-interview-grpc-gateway
-```sh
 docker-compose up -d
 ```
 This command will download the necessary Docker images (if not already available) and start the containers in detached mode.
