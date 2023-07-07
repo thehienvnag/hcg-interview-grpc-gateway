@@ -26,7 +26,8 @@ cd <repository_directory>
 ```sh
 docker-compose --env-file docker.env up --build
 ```
-This command will download the necessary Docker images (if not already available) and start the containers in detached mode.
+This command will build the necessary Docker images (if not already available) and start the corresponding containers.
+
 4. Wait for the services to start up. You can check the logs to monitor the progress:
 ```sh
 docker-compose --env-file docker.env logs -f
